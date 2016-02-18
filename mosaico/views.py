@@ -74,7 +74,7 @@ def image(request):
             image.save(response, "PNG")
         elif method == 'cover':
             src = request.GET['src']
-            height, width = [size(p) for p in params]
+            width, height = [size(p) for p in params]
             for upload in Upload.objects.all():
                 if upload.image.url == src:
                     break
@@ -89,7 +89,7 @@ def image(request):
         elif method == 'resize':
             src = request.GET['src']
             path = urlsplit(src).path
-            height, width = [size(p) for p in params]
+            width, height = [size(p) for p in params]
             for upload in Upload.objects.all():
                 if upload.image.url == path:
                     break
@@ -98,7 +98,7 @@ def image(request):
                 width = upload.image.width
             if not height:
                 height = upload.image.height
-            image.resize((width, height))
+            image.thumbnail((width, height), Image.ANTIALIAS)
             response = HttpResponse(content_type="image/%s" % image.format.lower())
             image.save(response, image.format)
         return response
