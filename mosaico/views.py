@@ -100,6 +100,7 @@ def image(request):
                 height = upload.image.height
             image.resize((width, height))
             response = HttpResponse(content_type="image/%s" % image.format.lower())
+            image.save(response, image.format)
         return response
 
 
