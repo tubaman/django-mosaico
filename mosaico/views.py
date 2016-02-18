@@ -1,5 +1,6 @@
 import json
 import logging
+from urlparse import urlsplit
 
 from django.shortcuts import render
 from django.core.mail import send_mail
@@ -87,9 +88,10 @@ def image(request):
             image.save(response, image.format)
         elif method == 'resize':
             src = request.GET['src']
+            path = urlsplit(src).path
             height, width = [size(p) for p in params]
             for upload in Upload.objects.all():
-                if upload.image.url == src:
+                if upload.image.url == path:
                     break
             image = Image.open(upload.image.file)
             if not width:
