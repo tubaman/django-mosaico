@@ -104,6 +104,21 @@ def image(request):
         return response
 
 
+@csrf_exempt
+def template(request):
+    html = transform(request.POST['html'])
+    action = request.POST['action']
+    if action == 'save':
+        name = request.POST['name']
+        template, created = Template.get_or_create(name=name)
+        template.html = html
+        template.save()
+        response = HttpResponse("template saved", status_code=201)
+    else:
+        response = HttpResponse("unknown action", status_code=400)
+    return response
+
+
 def get_placeholder_image(width, height):
     image = Image.new("RGB", (width, height))
     draw = ImageDraw.Draw(image)

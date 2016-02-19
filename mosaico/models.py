@@ -31,3 +31,11 @@ class Upload(models.Model):
             'url': url,
         }
         return data
+
+
+class Template(models.Model):
+    name = models.CharField(max_length=200)
+    html = models.TextField()
+
+    def __unicode__(self):
+        return self.name
