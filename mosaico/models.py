@@ -36,6 +36,7 @@ class Upload(models.Model):
 class Template(models.Model):
     name = models.CharField(max_length=200)
     html = models.TextField()
+    last_modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.name

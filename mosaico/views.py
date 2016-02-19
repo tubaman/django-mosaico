@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from premailer import transform
 from PIL import Image, ImageDraw
 
-from .models import Upload
+from .models import Upload, Template
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -110,12 +110,12 @@ def template(request):
     action = request.POST['action']
     if action == 'save':
         name = request.POST['name']
-        template, created = Template.get_or_create(name=name)
+        template, created = Template.objects.get_or_create(name=name)
         template.html = html
         template.save()
-        response = HttpResponse("template saved", status_code=201)
+        response = HttpResponse("template saved", status=201)
     else:
-        response = HttpResponse("unknown action", status_code=400)
+        response = HttpResponse("unknown action", status=400)
     return response
 
 
