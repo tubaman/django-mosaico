@@ -51,7 +51,7 @@ def upload(request):
         file = request.FILES.values()[0]
         upload = Upload(name=file.name, image=file)
         upload.save()
-    uploads = Upload.objects.all()
+    uploads = Upload.objects.all().order_by('-id')
     data = {'files': []}
     for upload in uploads:
         data['files'].append(upload.to_json_data())
