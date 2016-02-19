@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import posixpath
+from urlparse import urlparse
 
 from django.db import models
 from django.contrib.sites.models import Site
@@ -14,11 +15,14 @@ class Upload(models.Model):
         return posixpath.basename(self.image.name)
 
     def to_json_data(self):
-        domain = Site.objects.get_current().domain
-        url = "http://%s%s" % (domain, self.image.url)
+        url = self.image.url
+        parts = urlparse(url)
+        if parts.netloc == '':
+            domain = Site.objects.get_current().domain
+            url = "http://%s%s" % (domain, self.image.url)
         data = {
             'deleteType': 'DELETE',
-            'deleteUrl': self.image.url,
+            'deleteUrl': url,
             'name': posixpath.basename(self.image.name),
             'originalName': posixpath.basename(self.name),
             'size': self.image.size,
