@@ -1,5 +1,6 @@
 import json
 import logging
+import json
 from urlparse import urlsplit
 
 from django.shortcuts import render
@@ -106,12 +107,20 @@ def image(request):
 
 @csrf_exempt
 def template(request):
-    html = transform(request.POST['html'])
     action = request.POST['action']
     if action == 'save':
+        key = request.POST['key']
         name = request.POST['name']
-        template, created = Template.objects.get_or_create(name=name)
+        html = request.POST['html']
+        template_data = json.loads(request.POST['template_data'])
+        meta_data = json.loads(request.POST['meta_data'])
+        template, created = Template.objects.get_or_create(
+            key=key,
+            name=name
+        )
         template.html = html
+        template.template_data = template_data
+        template.meta_data = meta_data
         template.save()
         response = HttpResponse("template saved", status=201)
     else:

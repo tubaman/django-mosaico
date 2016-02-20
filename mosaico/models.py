@@ -5,6 +5,7 @@ from urlparse import urlparse
 from django.db import models
 from django.contrib.sites.models import Site
 from sorl.thumbnail import ImageField
+from jsonfield import JSONField
 
 
 class Upload(models.Model):
@@ -34,9 +35,13 @@ class Upload(models.Model):
 
 
 class Template(models.Model):
+    key = models.CharField(max_length=10)
     name = models.CharField(max_length=200)
     html = models.TextField()
     last_modified = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+    template_data = JSONField()
+    meta_data = JSONField()
 
     def __unicode__(self):
         return self.name
