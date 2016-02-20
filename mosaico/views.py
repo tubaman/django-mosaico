@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from django.contrib.auth.decorators import user_passes_test
 from premailer import transform
 from PIL import Image, ImageDraw
 
@@ -106,6 +107,7 @@ def image(request):
 
 
 @csrf_exempt
+@user_passes_test(lambda u: u.is_staff)
 def template(request):
     action = request.POST['action']
     if action == 'save':
