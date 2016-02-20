@@ -44,4 +44,4 @@ class Template(models.Model):
     meta_data = JSONField()
 
     def __unicode__(self):
-        return self.name
+        return "%s - %s" % (self.name, self.key)
