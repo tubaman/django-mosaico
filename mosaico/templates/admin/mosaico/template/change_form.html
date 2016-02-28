@@ -17,7 +17,6 @@
 
                 $('.edit-in-mosaico').click(function(e) {
                     var mdkey = mosaico_meta_data.key;
-                    console.log("mdkey: " + mdkey);
                     localStorage.setItem("metadata-" + mdkey, JSON.stringify(mosaico_meta_data));
                     localStorage.setItem("template-" + mdkey, JSON.stringify(mosaico_template_data));
                 });
