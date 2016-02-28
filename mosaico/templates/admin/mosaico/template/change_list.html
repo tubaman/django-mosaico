@@ -1,0 +1,11 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls admin_static admin_list %}
+
+{% block object-tools-items %}
+  <li>
+    <a href="{% url "mosaico:index" %}" class="addlink">
+      {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }} from Mosaico{% endblocktrans %}
+    </a>
+  </li>
+{{ block.super }}
+{% endblock %}
