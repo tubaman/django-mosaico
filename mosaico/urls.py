@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from .views import index, editor, upload, download, image, template
 
+app_name = 'mosaico'
 urlpatterns = [
     url(r'^$', index, name="index"),
     url(r'^editor.html$', editor, name="editor"),
