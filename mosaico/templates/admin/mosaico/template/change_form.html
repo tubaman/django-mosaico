@@ -3,7 +3,7 @@
 {% load jsonify %}
 
 {% block object-tools-items %}
-<li><a class="edit-in-mosaico" href="{% url 'editor'%}#{{ original.key }}">Edit in Mosaico</a></li>
+<li><a class="edit-in-mosaico" href="{% url 'mosaico:editor'%}#{{ original.key }}">Edit in Mosaico</a></li>
 {{ block.super }}
 {% endblock %}
 
