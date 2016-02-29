@@ -18,10 +18,12 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
+@user_passes_test(lambda u: u.is_staff)
 def index(request):
     return render(request, 'mosaico/index.html')
 
 
+@user_passes_test(lambda u: u.is_staff)
 def editor(request):
     return render(request, 'mosaico/editor.html')
 
