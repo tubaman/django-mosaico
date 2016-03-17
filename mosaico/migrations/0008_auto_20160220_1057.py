@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='template',
             name='template_data',
-            field=jsonfield.fields.JSONField(default=''),
+            field=jsonfield.fields.JSONField(default='{}'),
             preserve_default=False,
         ),
     ]
