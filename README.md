@@ -24,7 +24,7 @@ in python.
        url(r'^mosaico/', include('mosaico.urls')),
        ```
 
-   1. Setup [files uploaded by a user during development](https://docs.djangoproject.com/en/1.10/howto/static-files/#serving-uploaded-files-in-development)
+   1. Setup [`MEDIA_ROOT` and `MEDIA_URL`](https://docs.djangoproject.com/en/1.10/howto/static-files/#serving-uploaded-files-in-development)
    1. Run `python manage.py migrate` to create the mosaico models.
    1. Login to the django admin
    1. Change the [first site](http://127.0.0.1:8000/admin/sites/site/1/change/) in the Django admin to be:
