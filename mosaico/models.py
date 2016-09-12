@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 import posixpath
-from urlparse import urlparse
+from urlparse import urlparse, urlunparse
 
 from django.db import models
 from django.contrib.sites.models import Site
@@ -19,8 +19,11 @@ class Upload(models.Model):
         url = self.image.url
         parts = urlparse(url)
         if parts.netloc == '':
+            newparts = list(parts)
             domain = Site.objects.get_current().domain
-            url = "http://%s%s" % (domain, self.image.url)
+            newparts[0] = 'http'
+            newparts[1] = domain
+            url = urlunparse(newparts)
         data = {
             'deleteType': 'DELETE',
             'deleteUrl': url,
