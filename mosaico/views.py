@@ -43,7 +43,10 @@ def download(request):
         to = request.POST['rcpt']
         subject = request.POST['subject']
         from_email = settings.DEFAULT_FROM_EMAIL
-        send_mail(subject, "", from_email, [to], html_message=html, fail_silently=False)
+        # TODO: convert the HTML email to a plain-text message here.  That way
+        # we can have both HTML and plain text.
+        msg = ""
+        send_mail(subject, msg, from_email, [to], html_message=html, fail_silently=False)
         # TODO: return the mail ID here
         response = HttpResponse("OK: 250 OK id=12345")
     return response
