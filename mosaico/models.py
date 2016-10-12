@@ -40,7 +40,7 @@ class Upload(models.Model):
 class Template(models.Model):
     key = models.CharField(max_length=10)
     name = models.CharField(max_length=200)
-    html = models.TextField()
+    html = models.TextField(verbose_name="HTML")
     last_modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     template_data = JSONField()
