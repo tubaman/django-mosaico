@@ -88,8 +88,7 @@ def image(request):
                 if upload.image.url == src:
                     break
             image = Image.open(upload.image.file)
-            if width is not None and height is not None:
-                image.thumbnail((width, height), Image.ANTIALIAS)
+            image.thumbnail((width, height), Image.ANTIALIAS)
             response = HttpResponse(content_type="image/%s" % image.format.lower())
             image.save(response, image.format)
         elif method == 'resize':
